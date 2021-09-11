@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -11,10 +12,13 @@ import { join } from 'path';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  return: any;
+  constructor() {
+    return;
+  }
 }
