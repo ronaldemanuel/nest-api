@@ -51,4 +51,15 @@ export class UserService {
     const updatedUser = this.userRepositoy.create({ ...user, ...data }); // Like a merge
     return updatedUser;
   }
+
+  async deleteUser(id: string): Promise<boolean> {
+    const user = await this.findUserById(id);
+    const deleted = await this.userRepositoy.delete(user);
+
+    if (deleted) {
+      return true;
+    }
+
+    return false;
+  }
 }
