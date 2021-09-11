@@ -33,7 +33,7 @@ export class UserService {
   }
 
   async createUser(data: CreateUserInput): Promise<User> {
-    const user = await this.userRepositoy.create(data);
+    const user = this.userRepositoy.create(data);
     const userSaved = await this.userRepositoy.save(user);
 
     if (!userSaved) {
