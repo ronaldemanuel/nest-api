@@ -13,6 +13,11 @@ export class UserService {
     return;
   }
 
+  async findAllUsers(): Promise<User[]> {
+    const users = await this.userRepositoy.find();
+    return users;
+  }
+
   async createUser(data: CreateUserInput): Promise<User> {
     const user = await this.userRepositoy.create(data);
     const userSaved = await this.userRepositoy.save(user);
