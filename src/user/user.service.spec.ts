@@ -62,6 +62,15 @@ describe('UserService', () => {
       expect(userFound).toMatchObject({ name: user.name });
       expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
     });
+
+    it('should return a exception when does not find a user', async () => {
+      mockRepository.findOne.mockReturnValue(null);
+
+      expect(service.findUserById('2')).rejects.toBeInstanceOf(
+        NotFoundException,
+      );
+      expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
+    });
   });
 
   });
