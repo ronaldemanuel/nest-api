@@ -78,6 +78,18 @@ describe('UserService', () => {
     });
   });
 
+  describe('When create user', () => {
+    it('should create a user', async () => {
+      const user = UserUtil.giveMeAValidUser();
+      mockRepository.save.mockReturnValue(user);
+      mockRepository.create.mockReturnValue(user);
+      const savedUser = await service.createUser(user);
+
+      expect(savedUser).toMatchObject(user);
+      expect(mockRepository.save).toHaveBeenCalledTimes(1);
+      expect(mockRepository.create).toHaveBeenCalledTimes(1);
+    });
+  });
   });
 
 });
