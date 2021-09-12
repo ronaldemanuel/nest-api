@@ -41,4 +41,16 @@ describe('UserService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('When search all users', () => {
+    it('should be list all users', async () => {
+      const user = UserUtil.giveMeAValidUser();
+      mockRepository.find.mockReturnValue([user, user]);
+      const users = await service.findAllUsers();
+
+      expect(users).toHaveLength(2);
+      expect(mockRepository.find).toHaveBeenCalledTimes(1);
+    });
+  });
+
 });
