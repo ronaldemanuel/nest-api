@@ -29,6 +29,15 @@ describe('UserService', () => {
     service = module.get<UserService>(UserService);
   });
 
+  beforeEach(() => {
+    mockRepository.find.mockReset();
+    mockRepository.findOne.mockReset();
+    mockRepository.create.mockReset();
+    mockRepository.save.mockReset();
+    mockRepository.update.mockReset();
+    mockRepository.delete.mockReset();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
