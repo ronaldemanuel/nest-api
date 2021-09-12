@@ -15,7 +15,7 @@ describe('UserService', () => {
     delete: jest.fn(),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
