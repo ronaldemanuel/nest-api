@@ -89,6 +89,21 @@ describe('UserService', () => {
       expect(mockRepository.save).toHaveBeenCalledTimes(1);
       expect(mockRepository.create).toHaveBeenCalledTimes(1);
     });
+
+    it('should return a exception when doesnt create user', async () => {
+      const user = UserUtil.giveMeAValidUser();
+      mockRepository.save.mockReturnValue(null);
+      mockRepository.create.mockReturnValue(user);
+
+      await service.createUser(user).catch((e) => {
+        expect(e).toBeInstanceOf(InternalServerErrorException);
+        expect(e).toMatchObject({
+          message: 'Erro ao criar usuário.',
+        });
+      });
+      expect(mockRepository.save).toHaveBeenCalledTimes(1);
+      expect(mockRepository.create).toHaveBeenCalledTimes(1);
+    });
   });
   });
 
