@@ -105,6 +105,31 @@ describe('UserService', () => {
       expect(mockRepository.create).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('When update user', () => {
+    it('should update a user', async () => {
+      const user = UserUtil.giveMeAValidUser();
+      const updatedUser = { name: 'Nome Atualizado' };
+      mockRepository.findOne.mockReturnValue(user);
+      mockRepository.update.mockReturnValue({
+        ...user,
+        ...updatedUser,
+      });
+      mockRepository.create.mockReturnValue({
+        ...user,
+        ...updatedUser,
+      });
+
+      const resultUser = await service.updateUser('1', {
+        ...user,
+        name: 'Nome Atualizado',
+      });
+
+      expect(resultUser).toMatchObject(updatedUser);
+      expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
+      expect(mockRepository.update).toHaveBeenCalledTimes(1);
+      expect(mockRepository.create).toHaveBeenCalledTimes(1);
+    });
   });
 
 });
