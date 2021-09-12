@@ -53,4 +53,17 @@ describe('UserService', () => {
     });
   });
 
+  describe('When search user by id', () => {
+    it('should find a existing user', async () => {
+      const user = UserUtil.giveMeAValidUser();
+      mockRepository.findOne.mockReturnValue(user);
+      const userFound = await service.findUserById('1');
+
+      expect(userFound).toMatchObject({ name: user.name });
+      expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  });
+
 });
