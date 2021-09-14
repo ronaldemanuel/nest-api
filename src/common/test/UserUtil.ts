@@ -6,6 +6,7 @@ export default class UserUtil {
     user.id = '1';
     user.name = 'Test name';
     user.email = 'test@email.com';
+    user.password = '123456';
 
     return user;
   }
